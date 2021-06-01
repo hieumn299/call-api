@@ -17,6 +17,14 @@ const products = (state = initialState, action) => {
                 console.log(action);
                 state.push(action.product)
                 return [...state]
+
+            case Types.UPDATE_PRODUCT:
+                console.log(action);
+                var index = (state.findIndex((item) => {
+                    return item.id === action.product.id;
+                }));
+                state[index] = action.product;
+                return [...state]
             default:
                 return [...state];
         }

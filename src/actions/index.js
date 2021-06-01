@@ -60,20 +60,20 @@ export const acGetProduct = (product) => {
 }
 export const acUpdateProductRequest = (product) => {
     return (dispatch) => {
-        return callApi(`products/${product.id}`, 'GET', {
+        return callApi(`products/${product.id}`, 'PUT', {
             id: product.id,
             name: product.name,
             price: product.price,
             status: product.status
         }).then(res => {
             console.log(res.data);
-            dispatch(acGetProduct(res.data))
+            dispatch(acUpdateProduct(res.data))
         })
     }
 }
 export const acUpdateProduct = (product) => {
     return {
-        type: Types.EDIT_PRODUCT,
+        type: Types.UPDATE_PRODUCT,
         product
     }
 }

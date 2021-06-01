@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import callApi from '../utils/apiCaller';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as Action from '../actions/index';
@@ -57,13 +56,15 @@ class ProductActionPage extends Component {
             status:this.state.chkbstt
         }
         if(this.state.id){
-            callApi(`products/${this.state.id}`,'PUT',{
-                name:this.state.nameProduct,
-                price:this.state.priceProduct,
-                status:this.state.chkbstt
-            }).then(res=>{
-                history.goBack();
-            })
+            // callApi(`products/${this.state.id}`,'PUT',{
+            //     name:this.state.nameProduct,
+            //     price:this.state.priceProduct,
+            //     status:this.state.chkbstt
+            // }).then(res=>{
+            //     history.goBack();
+            // })
+            this.props.onUpdateProduct(product);
+            history.goBack();
         }
         else{
             // callApi('products','POST',{
@@ -124,6 +125,9 @@ const mapDisPatchToProps=(dispatch,props)=>{
         },
         onEditProduct:(id)=>{
             dispatch(Action.acGetProductRequest(id));
+        },
+        onUpdateProduct:(product)=>{
+            dispatch(Action.acUpdateProductRequest(product))
         }
     }
 }
